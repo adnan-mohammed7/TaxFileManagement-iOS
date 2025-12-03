@@ -40,11 +40,13 @@ struct RegistrationView: View {
         validString(street) &&
         validString(city) &&
         validString(zipcode) &&
-        validString(companyName)
+        validString(companyName) &&
+        validString(companyCatchPhrase) &&
+        validString(companyBs)
     }
     
     var body: some View {
-        NavigationStack {
+        VStack {
             Form {
                 Section(header: Text("Login info")) {
                     TextField("Name", text: $name)

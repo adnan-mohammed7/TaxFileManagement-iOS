@@ -5,14 +5,6 @@
 //  Created by user278021 on 11/28/25.
 //
 
-
-//
-//  CustomerInputModel.swift
-//  Assignment-4
-//
-//  Created by user278021 on 11/28/25.
-//
-
 import Foundation
 
 struct CustomerInputModel {

@@ -74,7 +74,7 @@ class CoreDataHelper {
         let request = Customer.fetchRequest()
         request.sortDescriptors = [NSSortDescriptor(key: "id", ascending: false)]
         request.fetchLimit = 1
-
+        
         if let last = try? context.fetch(request).first {
             return last.id + 1
         } else {
@@ -84,44 +84,96 @@ class CoreDataHelper {
     
     
     static func validateAdmin(username: String, password: String) -> Bool {
-            let request = Admin.fetchRequest()
-
-            do {
-                let admins = try context.fetch(request)
-                for admin in admins {
-                    let adminUsername = admin.username ?? ""
-                    let adminPassword = admin.password ?? ""
-
-                    if adminUsername.caseInsensitiveCompare(username) == .orderedSame &&
-                        adminPassword == password {
-                        return true
-                    }
+        let request = Admin.fetchRequest()
+        
+        do {
+            let admins = try context.fetch(request)
+            for admin in admins {
+                let adminUsername = admin.username ?? ""
+                let adminPassword = admin.password ?? ""
+                
+                if adminUsername.caseInsensitiveCompare(username) == .orderedSame &&
+                    adminPassword == password {
+                    return true
                 }
-                return false
-            } catch {
-                print("Admin validation error:", error)
-                return false
             }
+            return false
+        } catch {
+            print(error)
+            return false
         }
-
-        static func validateCustomer(username: String, password: String) -> Bool {
+    }
+    
+    static func validateCustomer(username: String, password: String) -> Bool {
+        let request = Customer.fetchRequest()
+        
+        do {
+            let customers = try context.fetch(request)
+            for customer in customers {
+                let customerUsername = customer.username ?? ""
+                let customerPassword = customer.password ?? ""
+                
+                if customerUsername.caseInsensitiveCompare(username) == .orderedSame &&
+                    customerPassword == password {
+                    return true
+                }
+            }
+            return false
+        } catch {
+            print(error)
+            return false
+        }
+    }
+    
+    static func updateCustomer(customer: Customer){
+        do {
+            try context.save()
+            print("Customer updated from CustomerHomeView")
+        } catch {
+            print(error)
+        }
+    }
+    
+    static func getCustomer(username: String, password: String) -> Customer? {
+        let request = Customer.fetchRequest()
+        
+        do {
+            let customers = try context.fetch(request)
+            for customer in customers {
+                let customerUsername = customer.username ?? ""
+                let customerPassword = customer.password ?? ""
+                
+                if customerUsername.caseInsensitiveCompare(username) == .orderedSame &&
+                    customerPassword == password {
+                    return customer
+                }
+            }
+            return nil
+        } catch {
+            print(error)
+            return nil
+        }
+    }
+    
+    static func getAllCustomers() -> [Customer] {
             let request = Customer.fetchRequest()
+            request.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]
 
             do {
-                let customers = try context.fetch(request)
-                for customer in customers {
-                    let adminUsername = customer.username ?? ""
-                    let adminPassword = customer.password ?? ""
-
-                    if adminUsername.caseInsensitiveCompare(username) == .orderedSame &&
-                        adminPassword == password {
-                        return true
-                    }
-                }
-                return false
+                return try context.fetch(request)
             } catch {
-                print("Customer validation error:", error)
-                return false
+                print(error)
+                return []
             }
         }
+    
+    static func deleteCustomer(_ customer: Customer) {
+            context.delete(customer)
+            do {
+                try context.save()
+            } catch {
+                print(error)
+            }
+        }
+
 }
