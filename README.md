@@ -32,7 +32,6 @@ A comprehensive SwiftUI iOS app for tax file management with dual-role authentic
 
 ## Screenshots
 <img width="401" height="815" alt="image" src="https://github.com/user-attachments/assets/8d23c3b5-adc3-4d05-83c2-db141e59b329" />
-<img width="388" height="817" alt="image" src="https://github.com/user-attachments/assets/c3a22bf7-7ff1-4430-a3cf-5532266f13b4" />
 <img width="403" height="819" alt="image" src="https://github.com/user-attachments/assets/0e7a3c62-28d8-4793-932d-441a65e8ab6e" />
 <img width="409" height="826" alt="image" src="https://github.com/user-attachments/assets/19be9b20-f499-4074-99f6-2f81908eac06" />
 <img width="393" height="825" alt="image" src="https://github.com/user-attachments/assets/57c4d535-05fc-47a2-aba3-7d3f4341f344" />
